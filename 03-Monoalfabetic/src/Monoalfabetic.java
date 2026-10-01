@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Monoalfabetic {
 
     private static String abecedari = "aáàbcçdeéèfghiíìïjklmnñoóòpqrstuúùüvwxyz";
@@ -61,5 +65,46 @@ public class Monoalfabetic {
         }
 
         return resultat; 
+    }
+
+    public static char[] permutaAlfabet(char[] alfabet){
+        List<Character> llista = new ArrayList<>();
+
+        for(int i = 0; i < alfabet.length; i++){
+            llista.add(alfabet[i]);
+        }
+
+        Collections.shuffle(llista);
+
+        char[] permutat = new char[llista.size()];
+
+        for(int i = 0; i < llista.size(); i++){
+            permutat[i] = llista.get(i);
+        }
+        return permutat;
+    }
+
+    public static void main(String[] args){
+        alfabetPermutat = permutaAlfabet(majuscules);
+
+        String[] paraules = {"Test 01 àrbitre, coixí, Perímetre" , 
+                             "Test 02 Taüll, DÍA, año" , 
+                             "Test 03 Peça, Òrrius, Bòlivia"};
+
+        String[] xifrats = new String[paraules.length];
+
+        System.out.println("Xifratge\n---------");
+
+        for(int i = 0; i < paraules.length; i ++){
+            xifrats[i] = xifraMonoAlfa(paraules[i]);
+            System.out.println(paraules[i] + " => " + xifrats[i]);
+        }
+
+        System.out.println("\nDesxifratge\n---------");
+        
+        for(int i = 0; i < xifrats.length; i++){
+            String deisxifrat = desxifraMonoAlfa(xifrats[i]);
+            System.out.println(xifrats[i] + " => " + deisxifrat);
+        }
     }
 }
