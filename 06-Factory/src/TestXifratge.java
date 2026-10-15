@@ -1,8 +1,12 @@
+import iticbcn.xifratge.*;
+
 public class TestXifratge {
     public static void main(String[] args) {
         AlgorismeFactory[] aFactory = {
-            new AlgorismeAES(), new AlgorismeMonoalfabetic(),
-            new AlgorismePoliAlfabetic(), new AlgorismeRotx()
+            new AlgorismeAES(), 
+            new AlgorismeMonoalfabetic(),
+            new AlgorismePoliAlfabetic(), 
+            new AlgorismeRotx()
         };
 
         String[] aNames = {"AES", "Monoalfabetic", "Polialfabetic", "Rotx"};
@@ -20,7 +24,7 @@ public class TestXifratge {
         };
 
         for (int i = 0; i < aFactory.length; i++) {
-            AlgorismeFactory alg = aFactory[i]; // Corregido: AlgorismeFactory
+            AlgorismeFactory alg = aFactory[i];
             String nom = aNames[i];
 
             Xifrador xifrador = alg.creaXifrador();
@@ -29,16 +33,16 @@ public class TestXifratge {
 
             for (String msg : msgs) {
                 for (String clau : claus[i]) {
-                    System.out.println("msg " + msg);
+                    System.out.println("msg: " + msg);
                     System.out.println("Algorisme: " + nom);
-                    System.out.println("Clau " + clau);
+                    System.out.println("Clau: " + clau);
 
-                    TextXifrat tx = null; // Declaración de la variable tx
+                    TextXifrat tx = null;
 
                     try {
                         tx = xifrador.xifra(msg, clau);
-                    } catch (ClauNoSuportada e) { // Se añade el bloque catch faltante
-                        System.err.println(e.getLocalizedMessage());
+                    } catch (ClauNoSuportada e) {
+                        System.out.println(e.getMessage());
                     }
 
                     System.out.println("TextXifrat: " + tx);
@@ -47,7 +51,7 @@ public class TestXifratge {
                     try {
                         desxifrat = xifrador.desxifra(tx, clau);
                     } catch (ClauNoSuportada e) {
-                        System.err.println(e.getLocalizedMessage());
+                        System.out.println(e.getMessage());
                     }
 
                     System.out.println("Desxifrat: " + desxifrat);
